@@ -34,20 +34,24 @@ public class HttpTask2 {
         return urlParts[part];
     }
     
-    public static void main(String[] args) throws IOException {
-        URL pictureUrl = new URL(mapper.readValue(getHttpResponse(URL)
-                .getEntity().getContent(), 
-                new TypeReference<NasaResponse>() {})
-        .getUrl());
-        String fileName = DIR_PREFIX + "/" + getFileName(pictureUrl);
-        byte[] pictureBuffer = getHttpResponse(pictureUrl.toString())
-                .getEntity()
-                .getContent()
-                .readAllBytes();
-        File picture = new File(fileName);
-        FileOutputStream fos = new FileOutputStream(picture);
-        fos.write(pictureBuffer);
-        fos.flush();
-        fos.close();
+    public static void main(String[] args) {
+        try {
+            URL pictureUrl = new URL(mapper.readValue(getHttpResponse(URL)
+                    .getEntity().getContent(), 
+                    new TypeReference<NasaResponse>() {})
+                    .getUrl());
+            String fileName = DIR_PREFIX + "/" + getFileName(pictureUrl);
+            byte[] pictureBuffer = getHttpResponse(pictureUrl.toString())
+                    .getEntity()
+                    .getContent()
+                    .readAllBytes();
+            File picture = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(picture);
+            fos.write(pictureBuffer);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

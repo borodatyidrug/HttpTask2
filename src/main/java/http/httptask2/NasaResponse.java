@@ -3,6 +3,7 @@ package http.httptask2;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NasaResponse {
+    private final String copyright;
     private final String date;
     private final String explanation;
     private final String hdurl;
@@ -12,6 +13,7 @@ public class NasaResponse {
     private final String url;
 
     public NasaResponse(
+            @JsonProperty("copyright") String copyright,
             @JsonProperty("date") String date, 
             @JsonProperty("explanation") String explanation, 
             @JsonProperty("hdurl") String hdurl, 
@@ -19,6 +21,7 @@ public class NasaResponse {
             @JsonProperty("service_version") String serviceVersion, 
             @JsonProperty("title") String title, 
             @JsonProperty("url") String url) {
+        this.copyright = copyright;
         this.date = date;
         this.explanation = explanation;
         this.hdurl = hdurl;
@@ -28,6 +31,10 @@ public class NasaResponse {
         this.url = url;
     }
 
+    public String getCopyright() {
+        return copyright;
+    }
+    
     public String getDate() {
         return date;
     }
